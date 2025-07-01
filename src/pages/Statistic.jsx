@@ -1,11 +1,41 @@
+import { useEffect, useState } from 'react';
 import '../istatistic.css'
 import { useTasks } from '../taskProvider';
 export default function Statistic(){
 
-    const {getStats,getCategoryStats,getPlanTypeStats} = useTasks()
+    const { tasks, getStats,getCategoryStats,getPlanTypeStats} = useTasks()
     const onGetStats = getStats();
     const onGetCategoryStats = getCategoryStats();
     const onGetPlanTypeStats = getPlanTypeStats();
+
+    const [now,setNow] = useState(new Date());
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            setNow(new Date());
+        },60000); // 1 dakika da bir güncelliyoruz
+        return () => clearInterval(interval);
+    },[]);
+
+    // bekleyen ve tamamlananları filtreliyoruz
+    // sadece burda kullanacağımız için burda tanımlıyoruz
+    const completedTasks = tasks.filter(task=> task.completed);
+    const pendingTasks = tasks.filter(task => !task.completed);
+
+    const lastCompleted = completedTasks.length > 0 ? completedTasks[completedTasks.length -1] : null;
+    const lastPending = pendingTasks.length > 0 ? pendingTasks[pendingTasks.length -1] : null;
+
+    function getTimeAgo(dateString) {
+        const date = new Date(dateString);
+        const diffMs = now - date;
+        const diffMins = Math.floor(diffMs / 60000);
+        if (diffMins < 1) return 'şimdi';
+        if (diffMins < 60) return `${diffMins} dakika önce`;
+        const diffHours = Math.floor(diffMins / 60);
+        if (diffHours < 24) return `${diffHours} saat önce`;
+        const diffDays = Math.floor(diffHours / 24);
+        return `${diffDays} gün önce`;
+    }
 
     return (
         <div className="statistics-container">
@@ -134,15 +164,15 @@ export default function Statistic(){
                     <div className="activity-item">
                         <span className="activity-icon completed"><i className="bi bi-check-circle"></i></span>
                         <div className="activity-content">
-                            <p>Örnek tamamlanan görev</p>
-                            <span className="activity-time">1 saat önce</span>
+                            <p>{lastCompleted ? lastCompleted.title : 'Henüz Tamamlanan Görev Yok'}</p>
+                            <span className="activity-time">{lastCompleted ? getTimeAgo(lastCompleted.createdAt) : ""}</span>
                         </div>
                     </div>
                     <div className="activity-item">
                         <span className="activity-icon pending"><i className="bi bi-hourglass-split"></i></span>
                         <div className="activity-content">
-                            <p>Örnek bekleyen görev</p>
-                            <span className="activity-time">2 saat önce</span>
+                            <p>{lastPending ? lastPending.title : 'Henüz Bekleyen Görev yok'}</p>
+                            <span className="activity-time">{lastPending ? getTimeAgo(lastPending.createdAt) : ""}</span>
                         </div>
                     </div>
                 </div>
