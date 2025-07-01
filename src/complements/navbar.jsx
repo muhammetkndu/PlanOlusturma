@@ -20,8 +20,8 @@ export default function Navbar() {
                     <ul>
                         <li><Link to="/">Anasayfa</Link></li>
                         <li><Link to="/todos">Yapılacaklar</Link></li>
-                        <li>Yapılanlar</li>
-                        <li>İstatistikler</li>
+                        <li><Link to="/done">Yapılanlar</Link></li>
+                        <li><Link to="/Statistic">İstatistikler</Link></li>
                     </ul>
                 </div>
                 <div className="profile">

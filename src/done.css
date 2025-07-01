@@ -1,0 +1,284 @@
+/* Modern Done Page Styles */
+.done {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: calc(100vh - 100px);
+}
+
+.done h1 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    font-size: 2.8rem;
+    font-weight: 800;
+    text-align: center;
+    margin-bottom: 3rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.done p {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #6c757d;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    border: 2px dashed #dee2e6;
+    margin: 2rem 0;
+}
+
+.done .detail {
+    background: white;
+    border-radius: 20px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-left: 5px solid #28a745;
+    position: relative;
+    overflow: hidden;
+}
+
+.done .detail::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    transform: scaleX(0);
+    transition: transform 0.3s ease;
+}
+
+.done .detail:hover::before {
+    transform: scaleX(1);
+}
+
+.done .detail:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+}
+
+.done .detail h3 {
+    color: #212529;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.done .detail h3::before {
+    content: '✓';
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+}
+
+.done .detail p {
+    color: #6c757d;
+    line-height: 1.6;
+    font-size: 1rem;
+    margin: 0;
+    background: none;
+    border: none;
+    padding: 0;
+    text-align: left;
+}
+
+/* Tamamlanan görevler için özel stil */
+.done .detail.completed {
+    background: linear-gradient(135deg, #f8fff9 0%, #e8f5e8 100%);
+    border-left-color: #28a745;
+}
+
+.done .detail.completed h3 {
+    color: #155724;
+}
+
+.done .detail.completed p {
+    color: #6c757d;
+}
+
+/* Başarı animasyonu */
+@keyframes successPulse {
+    0% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+.done .detail:hover h3::before {
+    animation: successPulse 0.6s ease-in-out;
+}
+
+/* Boş durum için özel stil */
+.done .empty-state {
+    text-align: center;
+    padding: 5rem 2rem;
+    color: #6c757d;
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    border-radius: 20px;
+    border: 2px dashed #dee2e6;
+    margin: 2rem 0;
+}
+
+.done .empty-state i {
+    font-size: 5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.4;
+    color: #667eea;
+}
+
+.done .empty-state h3 {
+    margin: 0 0 1rem 0;
+    color: #495057;
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.done .empty-state p {
+    margin: 0;
+    font-size: 1rem;
+    color: #6c757d;
+    line-height: 1.5;
+}
+
+/* Tamamlanan görev sayısı badge */
+.done .completion-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .done {
+        padding: 1rem;
+    }
+
+    .done h1 {
+        font-size: 2.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .done .detail {
+        padding: 1.5rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .done .detail h3 {
+        font-size: 1.3rem;
+    }
+
+    .done .empty-state {
+        padding: 3rem 1rem;
+    }
+
+    .done .empty-state i {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .done h1 {
+        font-size: 1.8rem;
+    }
+
+    .done .detail {
+        padding: 1.2rem;
+    }
+
+    .done .detail h3 {
+        font-size: 1.1rem;
+    }
+
+    .done .detail h3::before {
+        width: 20px;
+        height: 20px;
+        font-size: 0.7rem;
+    }
+
+    .done .empty-state {
+        padding: 2rem 1rem;
+    }
+
+    .done .empty-state i {
+        font-size: 2.5rem;
+    }
+}
+
+/* Özel animasyonlar */
+.done .detail {
+    animation: slideInUp 0.6s ease-out;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Hover efektleri */
+.done .detail:hover {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fff9 100%);
+}
+
+.done .detail:hover h3 {
+    color: #155724;
+}
+
+/* Tamamlanan görevler için özel ikon */
+.done .detail .completion-icon {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    box-shadow: 0 2px 8px rgba(40, 167, 69, 0.3);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.done .detail:hover .completion-icon {
+    opacity: 1;
+}
